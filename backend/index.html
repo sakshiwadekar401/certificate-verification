@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Verification System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+    <!-- Hidden Admin Button -->
+    <a href="admin.html" class="admin-icon" title="Admin Login">
+        <i class="fas fa-user-shield"></i>
+    </a>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Logo/Header -->
+        <div class="header">
+            <div class="logo-container">
+                <i class="fas fa-certificate"></i>
+            </div>
+            <h1 class="title">Certificate Verification</h1>
+            <p class="subtitle">Verify the authenticity of your certificates on blockchain</p>
+        </div>
+
+        <!-- Verification Card -->
+        <div class="verification-card">
+            <div class="card-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            
+            <h2>Upload Certificate</h2>
+            <p class="card-description">Upload your certificate file to verify its authenticity</p>
+
+            <!-- Upload Area -->
+            <div class="upload-area" id="uploadArea">
+                <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" hidden>
+                <div class="upload-content">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <p class="upload-text">Drag & Drop your certificate here</p>
+                    <p class="upload-subtext">or</p>
+                    <button class="browse-btn" onclick="document.getElementById('fileInput').click()">
+                        Browse Files
+                    </button>
+                    <p class="file-types">Supported: PDF, JPG, PNG</p>
+                </div>
+            </div>
+
+            <!-- File Preview -->
+            <div class="file-preview" id="filePreview" style="display: none;">
+                <div class="file-info">
+                    <i class="fas fa-file-alt"></i>
+                    <span id="fileName"></span>
+                </div>
+                <button class="remove-btn" id="removeFile">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Verify Button -->
+            <button class="verify-btn" id="verifyBtn" disabled>
+                <i class="fas fa-check-circle"></i>
+                Verify Certificate
+            </button>
+
+            <!-- Loading Spinner -->
+            <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+                <div class="spinner"></div>
+                <p>Verifying on blockchain...</p>
+            </div>
+
+            <!-- Result Area -->
+            <div class="result-area" id="resultArea" style="display: none;">
+                <!-- Will be populated by JS -->
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features">
+            <div class="feature-item">
+                <i class="fas fa-lock"></i>
+                <h3>Secure</h3>
+                <p>Blockchain-powered verification</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-bolt"></i>
+                <h3>Instant</h3>
+                <p>Real-time verification results</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-globe"></i>
+                <h3>Decentralized</h3>
+                <p>Stored on IPFS network</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

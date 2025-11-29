@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Certificate Verification</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+    <!-- Back to Home -->
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back to Home</span>
+    </a>
+
+    <!-- Login Section -->
+    <div class="admin-container" id="loginSection">
+        <div class="admin-card">
+            <div class="admin-header">
+                <div class="admin-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h1>Admin Login</h1>
+                <p>Enter your credentials to access the admin panel</p>
+            </div>
+
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">
+                        <i class="fas fa-user"></i>
+                        Username
+                    </label>
+                    <input type="text" id="username" placeholder="Enter username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i>
+                        Password
+                    </label>
+                    <input type="password" id="password" placeholder="Enter password" required>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </button>
+
+                <div class="error-message" id="loginError" style="display: none;"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel Section -->
+    <div class="admin-container" id="adminPanel" style="display: none;">
+        <div class="panel-header">
+            <h1>Admin Dashboard</h1>
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </button>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="totalCerts">0</h3>
+                    <p>Total Certificates</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="validCerts">0</h3>
+                    <p>Valid Certificates</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                    <i class="fas fa-times-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="revokedCerts">0</h3>
+                    <p>Revoked Certificates</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" data-tab="issue">
+                <i class="fas fa-plus-circle"></i>
+                Issue Certificate
+            </button>
+            <button class="tab-btn" data-tab="manage">
+                <i class="fas fa-list"></i>
+                Manage Certificates
+            </button>
+        </div>
+
+        <!-- Issue Certificate Tab -->
+        <div class="tab-content active" id="issueTab">
+            <div class="admin-card">
+                <h2>
+                    <i class="fas fa-file-certificate"></i>
+                    Issue New Certificate
+                </h2>
+
+                <form id="issueCertForm" class="issue-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="certId">Certificate ID *</label>
+                            <input type="text" id="certId" placeholder="e.g., CERT-2024-001" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="studentName">Student Name *</label>
+                            <input type="text" id="studentName" placeholder="Enter student name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="courseName">Course Name *</label>
+                            <input type="text" id="courseName" placeholder="Enter course name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="issueDate">Issue Date *</label>
+                            <input type="date" id="issueDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="certFile">Upload Certificate File *</label>
+                        <div class="file-upload-box" id="fileUploadBox">
+                            <input type="file" id="certFile" accept=".pdf,.jpg,.jpeg,.png" hidden required>
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Click to upload or drag & drop</p>
+                            <span class="file-name" id="uploadedFileName"></span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Issue Certificate
+                    </button>
+
+                    <div class="success-message" id="issueSuccess" style="display: none;"></div>
+                    <div class="error-message" id="issueError" style="display: none;"></div>
+                </form>
+
+                <!-- Loading Overlay -->
+                <div class="loading-overlay" id="issueLoading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Issuing certificate on blockchain...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage Certificates Tab -->
+        <div class="tab-content" id="manageTab">
+            <div class="admin-card">
+                <h2>
+                    <i class="fas fa-clipboard-list"></i>
+                    Manage Certificates
+                </h2>
+
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchCert" placeholder="Search by Certificate ID, Student Name, or Course...">
+                </div>
+
+                <div class="certificates-list" id="certificatesList">
+                    <!-- Will be populated by JavaScript -->
+                    <div class="no-data">
+                        <i class="fas fa-inbox"></i>
+                        <p>No certificates found</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.8.0/dist/web3.min.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
